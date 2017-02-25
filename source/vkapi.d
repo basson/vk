@@ -1306,7 +1306,11 @@ class Longpoll : Thread {
             midResolveOrder[mid] = processnm;
         }
 
-        if(from != api.me.id && ( ps.showConvNotifies ? true : !conv )) ps.lastlp = title ~ ": " ~ msg;
+        if(from != api.me.id && ( ps.showConvNotifies ? true : !conv )) {
+            ps.lastlp = title ~ ": " ~ msg;
+            auto pd = spawnShell(`tput bel`);
+            wait(pd);
+        }
         man.toggleUpdate();
     }
 
